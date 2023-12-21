@@ -42,8 +42,8 @@ twitter_model = load_model('model_twitter.h5', compile=False)
 reddit_model = load_model('model_reddit.h5', compile=False)
 
 CHATBOT_MAX_SEQUENCE_LENGTH = 120
-TWITTER_MAX_SEQUENCE_LENGTH = 100
-REDDIT_MAX_SEQUENCE_LENGTH = 1000
+TWITTER_MAX_SEQUENCE_LENGTH = 200
+REDDIT_MAX_SEQUENCE_LENGTH = 200
 VOCAB_SIZE = 1000
 TRUNC_TYPE = 'post'
 PADDING_TYPE = 'post'
@@ -137,7 +137,7 @@ def predict_twitter(text_input):
     result = twitter_model.predict(input_padded)
     print("Result:", result)
 
-    predict_label=['anger', 'fear', 'happy', 'love', 'sadness']
+    predict_label=['anger', 'fear', 'joy']
     return predict_label[np.argmax(result)]
 
 def predict_reddit(text_input):

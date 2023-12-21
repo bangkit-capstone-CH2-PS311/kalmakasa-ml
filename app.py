@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 import pandas as pd
-from predict import predict_chatbot, predict_twitter
+from predict import predict_chatbot, predict_twitter, predict_reddit
 
 app = Flask(__name__)
 
@@ -26,6 +26,8 @@ def predict():
             result = predict_chatbot(text_input)
         elif model_type == 'twitter':
             result = predict_twitter(text_input)
+        elif model_type == 'reddit':
+            result = predict_reddit(text_input)
         else:
             result = "Model type not found"
 
@@ -42,4 +44,4 @@ def predict():
     }, "data": None})
 
 if __name__ == '__main__':
-    app.run(port=8000, debug=True)
+    app.run(host="0.0.0.0", port=5000)

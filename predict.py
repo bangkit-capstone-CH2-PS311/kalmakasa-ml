@@ -39,10 +39,11 @@ STOPWORDS = set(stopwords.words('indonesian'))
 
 chatbot_model = load_model('model_chatbot.h5', compile=False)
 twitter_model = load_model('model_twitter.h5', compile=False)
-# reddit_model = load_model('model_reddit.h5', compile=False)
+reddit_model = load_model('model_reddit.h5', compile=False)
 
 CHATBOT_MAX_SEQUENCE_LENGTH = 120
 TWITTER_MAX_SEQUENCE_LENGTH = 100
+REDDIT_MAX_SEQUENCE_LENGTH = 1000
 VOCAB_SIZE = 1000
 TRUNC_TYPE = 'post'
 PADDING_TYPE = 'post'
@@ -143,15 +144,14 @@ def predict_reddit(text_input):
      # lowercase text
     text_input = text_input.lower()
 
-    print('text_input=',text_input)
+    cleaned_text = clean_text(text_input)
 
     # tokenize text input
-    input_sequences = reddit_tokenizer.texts_to_sequences([text_input])
-    input_padded = pad_sequences(input_sequences, CHATBOT_MAX_SEQUENCE_LENGTH)
+    input_sequences = reddit_tokenizer.texts_to_sequences([cleaned_text])
+    input_padded = pad_sequences(input_sequences, REDDIT_MAX_SEQUENCE_LENGTH)
     # predict chatbot model
-    result = chatbot_model.predict(input_padded)
+    result = reddit_model.predict(input_padded)
     print("Result:", result)
-
 
     print("Input Sequences:", input_sequences)
 

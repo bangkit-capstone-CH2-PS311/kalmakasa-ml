@@ -3,5 +3,6 @@
     "Depression": 1,
     "Bipolar": 2,
     "Personality disorder": 3,
-    "Anxiety": 4
+    "Anxiety": 4,
+    "Normal": 5
 }
